@@ -124,7 +124,7 @@ def loaduserfromnet(url):
     # Define the local filename to save data
     local_file = 'local_copy.txt'
     # Download remote and save locally
-    data = requests.get(url)
+    data = requests.get(url, verify=False)
     # Save file data to local copy
     file=open(local_file, 'wb')
     file.write(data.content)
@@ -241,7 +241,7 @@ def erfteststr():
     return('testvaule:%8.2f'%(v1))
 def NuclearPower():
     url='https://www.nusc.gov.tw/nuclearlive'
-    myResponse = requests.get(url)
+    myResponse = requests.get(url, verify=False)
     name_box=BeautifulSoup(myResponse.text,'html.parser')
 #    name_box=soup.find('div',attrs={'id':'page-html'})
     timebox=name_box.find('span', attrs={'class':'tx','id':'timeX'})
@@ -269,7 +269,7 @@ def NuclearPower():
     return(timebox.text.strip()+'\n'+LL1+'\n'+LL2+'\n'+LL3)
 def NuclearRadiation(plant):
     url = 'https://www.nusc.gov.tw/gammadetect/npp'+plant+'.html'
-    myResponse = requests.get(url)
+    myResponse = requests.get(url, verify=False)
     name_box=BeautifulSoup(myResponse.text,'html.parser')
     N0name=name_box.find('span',attrs={'class':'gamma_bk15','id':'monName_0_0'})
     N0value=name_box.find('span',attrs={'class':'gamma_bk15','id':'monValue_0_0'})
